@@ -999,6 +999,11 @@ def traces(
     # Plot traces.
     iterations = np.arange(trace.shape[1]) if x is None else x
     for i, _trace in enumerate(trace):
+        if "linestyle" in kwargs:
+            lstyle_obj = kwargs["linestyle"]
+            linestyle = lstyle_obj if isinstance(lstyle_obj, str) else lstyle_obj[i]
+        else:
+            linestyle = None
         ax.plot(
             iterations,
             _trace,
@@ -1006,6 +1011,7 @@ def traces(
             c=colors[i],
             linewidth=linewidth,
             zorder=zorder_traces,
+            linestyle=linestyle,
         )
 
     if highlight_mean:
