@@ -703,7 +703,11 @@ def plot_angular_tuning(
 
     color = (ON if intensity == 1 else OFF) if colors is None else colors
 
-    average_tuning = average_tuning / average_tuning.max()
+    # Normalize each tuning curve individually to peak at 1
+    if "network_id" in average_tuning.dims:
+        average_tuning = average_tuning / average_tuning.max(dim="angle")
+    else:
+        average_tuning = average_tuning / average_tuning.max()
 
     angles = average_tuning['angle'].values
     fig, ax = polar(
