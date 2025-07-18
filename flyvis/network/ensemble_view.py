@@ -223,7 +223,7 @@ class EnsembleView(Ensemble):
 
     @wraps(plot_fris)
     def flash_response_index(
-        self, cell_types: Optional[List[str]] = None, **kwargs
+        self, cell_types: Optional[List[str]] = None, scatter_best: bool = True, **kwargs
     ) -> Tuple[plt.Figure, plt.Axes]:
         """Plot the flash response indices of the ensemble.
 
@@ -245,7 +245,7 @@ class EnsembleView(Ensemble):
         return plot_fris(
             fris.values,
             cell_types,
-            scatter_best=True,
+            scatter_best=scatter_best,
             scatter_best_index=best_index,
             scatter_best_color=cm.get_cmap("Blues")(1.0),
             **kwargs,
