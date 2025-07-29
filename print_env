@@ -1,0 +1,23 @@
+#!/usr/bin/env python3
+import sys
+import platform
+import pkg_resources
+import torch
+
+print("Python version:", sys.version)
+print("Platform:", platform.platform())
+print("Processor:", platform.processor())
+print("Python implementation:", platform.python_implementation())
+print("PyTorch version:", torch.__version__)
+print("CUDA available:", torch.cuda.is_available())
+print("CUDA version:", torch.version.cuda)
+print("cuDNN version:", torch.backends.cudnn.version())
+print(
+    "GPU name:",
+    torch.cuda.get_device_name(0) if torch.cuda.is_available() else "No GPU",
+)
+installed_packages = sorted(
+    ["%s==%s" % (i.key, i.version) for i in pkg_resources.working_set]
+)
+for pkg in installed_packages:
+    print(pkg)
